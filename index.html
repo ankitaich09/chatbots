@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Landing Page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .chatbot-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100vh;
+        }
+        .chatbot {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 200px;
+        }
+        .chatbot:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+        .chatbot img {
+            max-width: 100px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chatbot-container">
+        <div class="chatbot" onclick="window.location.href='chatbot1.html';">
+            <img src="chatbot1-logo.png" alt="Chatbot 1">
+            <h2>Chatbot 1</h2>
+        </div>
+        <div class="chatbot" onclick="window.location.href='chatbot2.html';">
+            <img src="chatbot2-logo.png" alt="Chatbot 2">
+            <h2>Chatbot 2</h2>
+        </div>
+        <div class="chatbot" onclick="window.location.href='chatbot3.html';">
+            <img src="chatbot3-logo.png" alt="Chatbot 3">
+            <h2>Chatbot 3</h2>
+        </div>
+        <div class="chatbot" onclick="window.location.href='chatbot4.html';">
+            <img src="chatbot4-logo.png" alt="Chatbot 4">
+            <h2>Chatbot 4</h2>
+        </div>
+        <div class="chatbot" onclick="window.location.href='chatbot5.html';">
+            <img src="chatbot5-logo.png" alt="Chatbot 5">
+            <h2>Chatbot 5</h2>
+        </div>
+    </div>
+</body>
+</html>
