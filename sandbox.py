@@ -11,13 +11,17 @@ def find_alias_match(input_string, json_file_path):
 
     for item in data.keys():
         if "aliases" in data[item] and input_string in data[item]["aliases"]:
-            return item
+            return {
+                'Name':item,
+                'Dosage':data[item]["properties"]["dose"],
+                'Summary':data[item]["properties"]["summary"]
+            }
 
     return None  # Return None if no match is found
 
 
 # Example usage
-input_string = "2ai"
+input_string = "14bd"
 json_file_path = "drugs.json"
 result = find_alias_match(input_string, json_file_path)
 
