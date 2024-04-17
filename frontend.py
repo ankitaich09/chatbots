@@ -14,6 +14,11 @@ def search():
 window = tk.Tk()
 window.title("Alias Search")
 
+#label
+
+label = tk.Label(window, text="TTRU Search Tool")
+label.pack(anchor=tk.W, padx=10, pady=10)
+
 # Input field
 entry = tk.Entry(window, width=50)
 entry.pack(pady=10)
@@ -23,7 +28,7 @@ button = tk.Button(window, text="Search", command=search)
 button.pack(pady=5)
 
 # Output text
-output_text = tk.Text(window, height=10, width=50)
+output_text = tk.Text(window, height=20, width=100)
 output_text.pack(pady=10)
 output_text.config(state=tk.DISABLED)
 
