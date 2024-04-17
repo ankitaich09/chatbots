@@ -21,11 +21,10 @@ def find_alias_match(input_string, json_file_path):
 
 
 # Example usage
-input_string = "14bd"
+input_string = input("What are you searching for? ")
 json_file_path = "drugs.json"
 result = find_alias_match(input_string, json_file_path)
-
 if result:
-    print(result)
+    print(f"You wanted to search for {input_string}. This substance is officially called {result['Name']}. \n The safe dosage is {result['Dosage']} \n. Here's more about the substance :\n {result['Summary']}")
 else:
     print("No match found")
