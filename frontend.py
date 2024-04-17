@@ -1,9 +1,10 @@
 import tkinter as tk
-from sandbox import find_alias_match
+from sandbox import find_alias_match, print_format
 
 def search():
     input_string = entry.get()
-    output = find_alias_match(input_string)
+    output = find_alias_match(input_string, "drugs.json")
+    output = print_format(output)
     output_text.config(state=tk.NORMAL)
     output_text.delete('1.0', tk.END)
     output_text.insert(tk.END, output)
