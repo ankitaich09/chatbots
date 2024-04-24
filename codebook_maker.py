@@ -19,7 +19,7 @@ def get_all_categories():
     return cats
 
 
-for each_drug in data.keys()
+for each_drug in data.keys():
     official_name = each_drug
     aliases = data[each_drug]['aliases']
     categories = data[each_drug]['categories']
