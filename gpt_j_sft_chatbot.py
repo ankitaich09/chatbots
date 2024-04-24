@@ -9,8 +9,9 @@ input_column = 'Questions'
 output_column = 'Answers'
 
 # Create a tokenizer and model
-tokenizer = GPTJTokenizer.from_pretrained("EleutherAI/gpt-j-6B")
-model = GPTJForCausalLM.from_pretrained("EleutherAI/gpt-j-6B")
+cache_dir = '/data/ankit/model_caches'
+tokenizer = GPTJTokenizer.from_pretrained("EleutherAI/gpt-j-6B", cache_dir=cache_dir)
+model = GPTJForCausalLM.from_pretrained("EleutherAI/gpt-j-6B", cache_dir=cache_dir)
 
 # Tokenize the data
 def tokenize_function(examples):
