@@ -1,4 +1,4 @@
-from transformers import GPTJForCausalLM, GPTJTokenizer, Trainer, TrainingArguments, DataCollatorForLanguageModeling, TextDataset
+from transformers import AutoTokenizer, AutoModelForCausalLM, Trainer, TrainingArguments, DataCollatorForLanguageModeling, TextDataset
 import pandas as pd
 
 # Load your CSV file
@@ -10,8 +10,8 @@ output_column = 'Answers'
 
 # Create a tokenizer and model
 cache_dir = '/data/ankit/model_caches'
-tokenizer = GPTJTokenizer.from_pretrained("EleutherAI/gpt-j-6B", cache_dir=cache_dir)
-model = GPTJForCausalLM.from_pretrained("EleutherAI/gpt-j-6B", cache_dir=cache_dir)
+tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-j-6b", cache_dir=cache_dir)
+model = AutoModelForCausalLM.from_pretrained("EleutherAI/gpt-j-6b", cache_dir=cache_dir)
 
 # Tokenize the data
 def tokenize_function(examples):
