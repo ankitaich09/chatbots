@@ -1,5 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM, Trainer, TrainingArguments, DataCollatorForLanguageModeling, TextDataset
 import pandas as pd
+from datasets import Dataset
 
 # Load your CSV file
 df = pd.read_csv('substances.csv')
@@ -10,17 +11,25 @@ output_column = 'Answers'
 
 # Create a tokenizer and model
 cache_dir = '/data/ankit/model_caches'
-tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-j-6b", cache_dir=cache_dir)
-model = AutoModelForCausalLM.from_pretrained("EleutherAI/gpt-j-6b", cache_dir=cache_dir)
+
+tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-neo-2.7B", cache_dir=cache_dir)
+# Add a padding token to the tokenizer
+tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+# Create a new tokenizer object with the padding token
+tokenizer.pad_token = '[PAD]'
+
+model = AutoModelForCausalLM.from_pretrained("EleutherAI/gpt-neo-2.7B", cache_dir=cache_dir)
 
 # Tokenize the data
-def tokenize_function(examples):
-    return tokenizer(examples[input_column], padding="max_length", truncation=True)
-
-tokenized_datasets = df.map(tokenize_function, batched=True)
+tokenized_inputs = []
+for index, row in df.iterrows():
+    tokenized_input = tokenizer(row[input_column], truncation=True, return_tensors="pt")
+    tokenized_inputs.append(tokenized_input)
 
 # Prepare the dataset
-data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
+dataset = Dataset.from_dict({"input_ids": [ti["input_ids"][0].tolist() for ti in tokenized_inputs],
+                              "attention_mask": [ti["attention_mask"][0].tolist() for ti in tokenized_inputs]})
+
 
 # Define the training arguments
 training_args = TrainingArguments(
@@ -37,8 +46,8 @@ training_args = TrainingArguments(
 trainer = Trainer(
     model=model,
     args=training_args,
-    data_collator=data_collator,
-    train_dataset=tokenized_datasets["train"],
+    data_collator=DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False),
+    train_dataset=dataset,
 )
 
 # Fine-tune the model
