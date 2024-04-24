@@ -14,13 +14,13 @@ df = df.dropna(subset=[input_column, output_column])
 # Create a tokenizer and model
 cache_dir = '/data/ankit/model_caches'
 
-tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-neo-1.3B", cache_dir=cache_dir)
+tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-neo-2.7B", cache_dir=cache_dir, device_map="auto")
 # Add a padding token to the tokenizer
 tokenizer.add_special_tokens({'pad_token': '[PAD]'})
 # Create a new tokenizer object with the padding token
 tokenizer.pad_token = '[PAD]'
 
-model = AutoModelForCausalLM.from_pretrained("EleutherAI/gpt-neo-1.3B", cache_dir=cache_dir)
+model = AutoModelForCausalLM.from_pretrained("EleutherAI/gpt-neo-2.7B", cache_dir=cache_dir, device_map = "auto")
 
 # Tokenize the data
 tokenized_inputs = []
