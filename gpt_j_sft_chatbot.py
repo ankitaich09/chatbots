@@ -38,7 +38,7 @@ model.resize_token_embeddings(len(tokenizer))
 training_args = TrainingArguments(
     output_dir="/data/ankit/gpt-neo-finetuned",
     overwrite_output_dir=True,
-    num_train_epochs=3,
+    num_train_epochs=50,
     per_device_train_batch_size=1,
     save_steps=10_000,
     save_total_limit=2,
