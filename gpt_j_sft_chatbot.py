@@ -14,13 +14,13 @@ df = df.dropna(subset=[input_column, output_column])
 # Create a tokenizer and model
 cache_dir = '/data/ankit/model_caches'
 
-tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-neo-2.7B", cache_dir=cache_dir, device_map="auto")
+tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-neo-1.3B", cache_dir=cache_dir)
 # Add a padding token to the tokenizer
 tokenizer.add_special_tokens({'pad_token': '[PAD]'})
 # Create a new tokenizer object with the padding token
 tokenizer.pad_token = '[PAD]'
 
-model = AutoModelForCausalLM.from_pretrained("EleutherAI/gpt-neo-2.7B", cache_dir=cache_dir, device_map = "auto")
+model = AutoModelForCausalLM.from_pretrained("EleutherAI/gpt-neo-1.3B", cache_dir=cache_dir)
 
 # Tokenize the data
 tokenized_inputs = []
@@ -36,7 +36,7 @@ model.resize_token_embeddings(len(tokenizer))
 
 # Define the training arguments
 training_args = TrainingArguments(
-    output_dir="/data/ankit/gpt-j-finetuned",
+    output_dir="/data/ankit/gpt-neo-finetuned",
     overwrite_output_dir=True,
     num_train_epochs=3,
     per_device_train_batch_size=1,
@@ -57,5 +57,5 @@ trainer = Trainer(
 trainer.train()
 
 # Save the fine-tuned model
-model.save_pretrained("/data/ankit/gpt-j-finetuned")
-tokenizer.save_pretrained("/data/ankit/gpt-j-finetuned")
+model.save_pretrained("/data/ankit/gpt-neo-finetuned")
+tokenizer.save_pretrained("/data/ankit/gpt-neo-finetuned")
