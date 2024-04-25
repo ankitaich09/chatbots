@@ -14,7 +14,7 @@ def generate_response(input_text):
     # Tokenize the dialogue history
     input_ids = tokenizer.encode("\n".join(dialogue_history[-3:]), return_tensors="pt")
     # Generate a response using the model
-    output = model.generate(input_ids, max_new_tokens=500, pad_token_id=tokenizer.eos_token_id)
+    output = model.generate(input_ids, max_new_tokens=200, pad_token_id=tokenizer.eos_token_id)
     # Decode the generated output
     response = tokenizer.decode(output[0], skip_special_tokens=True)
     # Add bot response to dialogue history
@@ -31,8 +31,8 @@ def main():
             break
         # Generate response
         response = generate_response(user_input)
-        # Print response
-        print("Bot:", response)
+        # Print bot's response
+        print("Bot:", response.split("Bot:")[-1].strip())
 
 if __name__ == "__main__":
     main()
