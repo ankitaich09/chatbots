@@ -1,9 +1,9 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, AutoModelForSeq2SeqLM
 
 # Load the fine-tuned GPT-Neo model and tokenizer
-model = AutoModelForCausalLM.from_pretrained("/data/ankit/gpt-neo-finetuned")
+model = AutoModelForSeq2SeqLM.from_pretrained("/data/ankit/flan-finetuned")
 model.to("cuda")
-tokenizer = AutoTokenizer.from_pretrained("/data/ankit/gpt-neo-finetuned")
+tokenizer = AutoTokenizer.from_pretrained("/data/ankit/flan-finetuned")
 # Initialize dialogue history
 dialogue_history = []
 
