@@ -16,7 +16,7 @@ def generate_response(input_text):
     #input_ids = tokenizer.encode("\n".join(dialogue_history[-3:]), return_tensors="pt").to("cuda")
     input_ids = tokenizer.encode(input_text, return_tensors="pt").to("cuda")
     # Generate a response using the model
-    output = model.generate(input_ids, max_new_tokens=200, pad_token_id=tokenizer.eos_token_id)
+    output = model.generate(input_ids, max_new_tokens=300, pad_token_id=tokenizer.eos_token_id)
     # Decode the generated output
     response = tokenizer.decode(output[0], skip_special_tokens=True).split('<eos>')[-1].split('.')[0].strip()
     if response == 'The common dosage is, the light dose is, and the strong dose is':
