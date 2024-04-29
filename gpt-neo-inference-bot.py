@@ -19,6 +19,8 @@ def generate_response(input_text):
     output = model.generate(input_ids, max_new_tokens=200, pad_token_id=tokenizer.eos_token_id)
     # Decode the generated output
     response = tokenizer.decode(output[0], skip_special_tokens=True).split('<eos>')[-1].split('.')[0].strip()
+    if response == 'The common dosage is, the light dose is, and the strong dose is':
+        return 'I was not trained with relevant information for this use case, please ask me about something else.'
     # Add bot response to dialogue history
     #dialogue_history.append("Bot: " + response)
     return response
